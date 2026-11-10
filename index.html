@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dolly Parton — BUS 620 Leadership Jeopardy</title>
+<style>
+
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:#0c1546;color:#fff}
+main{max-width:1160px;margin:auto;padding:20px}
+.kicker{color:#c4d5ff;font-size:12px;font-weight:800;letter-spacing:1.5px}
+h1{font-size:clamp(24px,4vw,42px);margin:6px 0 18px;line-height:1.12}
+.opening{background:#f1d18d;color:#22244b;padding:17px;border-radius:10px;font-size:clamp(15px,2.4vw,20px);font-weight:700;line-height:1.45;margin-bottom:20px}
+.opening small{display:block;font-size:11px;letter-spacing:1.4px;margin-bottom:5px}
+.scroll{overflow-x:auto}
+.board{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:6px;min-width:480px}
+.heading{display:flex;align-items:center;justify-content:center;min-height:69px;background:#2844af;border:1px solid #8798ef;border-radius:5px;padding:8px;text-align:center;text-transform:uppercase;font-size:clamp(11px,1.6vw,16px);font-weight:900;line-height:1.15}
+.tile{min-height:80px;background:#1e38b0;color:#ffda7e;border:1px solid #758bf1;border-radius:5px;font-size:clamp(24px,3vw,35px);font-weight:900;cursor:pointer;text-shadow:1px 2px #10185a}
+.tile:hover,.tile:focus-visible{background:#3856dc;outline:3px solid white;outline-offset:-3px}
+.tile.done{background:#1a285d;color:#bbc7df;text-shadow:none}
+.toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:15px 0}
+.counter{font-size:13px;color:#cad7ff}
+button.control{border:1px solid #a6b7ff;background:transparent;color:white;border-radius:8px;padding:10px 13px;font:700 13px system-ui;cursor:pointer}
+button.control.primary{background:#f1d18d;color:#1e2852;border-color:#f1d18d}
+.panel{margin-top:16px;border:1px solid #879bef;background:#192d80;border-radius:12px;padding:21px}
+.panel[hidden],#solution[hidden],#reveal[hidden]{display:none}
+.panel-label{font-size:12px;color:#ffde91;letter-spacing:1px;text-transform:uppercase;font-weight:850}
+.clue{font-weight:800;font-size:clamp(19px,2.9vw,29px);line-height:1.4;margin:14px 0 20px}
+.answer{background:#f2f3fe;color:#14265c;padding:17px;border-radius:9px;font-size:clamp(16px,2.2vw,21px);font-weight:800;line-height:1.45}
+.answer small{font-size:11px;color:#58698f;display:block;margin-bottom:7px;letter-spacing:1px}
+.discussion{margin-top:16px;font-size:16px;line-height:1.6}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}
+.note{font-size:12px;line-height:1.6;color:#c1d0f6;margin-top:17px}
+.links{margin-top:27px;padding-top:16px;border-top:1px solid #5266a5;font-size:12px;line-height:1.9;color:#cbd6ff}
+.links a{color:#ffde91}
+@media(max-width:600px){main{padding:12px}.tile{min-height:68px}.board{gap:4px}.panel{padding:14px}}
+@media print{body{background:white;color:black}.opening{background:#eee}.tile{color:black;text-shadow:none}.panel{color:black;background:#eee}.toolbar button{display:none}}
+
+</style>
+</head>
+<body>
+<main>
+<div class="kicker">BUS 620 · TEAM LEADER CONVERSATION</div>
+<h1>DOLLY PARTON JEOPARDY!</h1>
+<div class="opening"><small>START THE CONVERSATION HERE</small>Was Dolly Parton’s greatest leadership achievement her personal influence, or the organizations and systems she created that allowed others to carry her vision forward?</div>
+<div class="scroll"><div class="board" id="board"></div></div>
+<div class="toolbar"><span class="counter" id="progress">0 of 20 clues covered</span><div><button type="button" class="control" id="fullscreen">Full screen</button> <button type="button" class="control" id="reset">Reset board</button></div></div>
+<section id="panel" class="panel" hidden><div id="label" class="panel-label"></div><div id="clue" class="clue"></div><div id="solution" hidden><div class="answer"><small>CORRECT JEOPARDY RESPONSE</small><span id="answer"></span></div><div class="discussion"><strong>Discussion follow-up:</strong> <span id="discussion"></span></div></div><div class="actions"><button type="button" id="reveal" class="control primary">Reveal response</button><button type="button" id="covered" class="control">Mark covered</button><button type="button" id="back" class="control">Return to board</button></div></section>
+<p class="note">Choose a dollar amount, discuss the clue, reveal its suggested response, then use the follow-up question to connect it to BUS 620. The game works entirely offline. Source links below are optional and require internet.</p>
+<div class="links"><strong>Research sources</strong><div><a href="https://dollywoodfoundation.org/history/" target="_blank" rel="noopener">Dollywood Foundation history</a></div><div><a href="https://imaginationlibrary.com/" target="_blank" rel="noopener">Dolly Parton’s Imagination Library</a></div><div><a href="https://www.dollywood.com/about-us" target="_blank" rel="noopener">Dollywood history</a></div><div><a href="https://www.dollyparton.com/news/official-announcement-dolly-parton-passes-away-at-80" target="_blank" rel="noopener">Official announcement, August 25, 2026</a></div></div>
+</main>
+<script>
+const DATA=[{"category":"Basics","clues":[["Founded in 1995 in Sevier County, Tennessee, this program sends free books to young children.","What is Dolly Parton's Imagination Library?","What makes creating this program an act of leadership rather than simply philanthropy?"],["This family partnered with Dolly to develop the Dollywood business.","Who are the Herschends?","What complementary expertise did the partners bring to the venture?"],["According to the course definition, leadership involves influencing individuals to achieve this.","What is a common goal?","What were the common goals behind Dollywood and the Imagination Library?"],["Her father's inability to read or write helped inspire Dolly's commitment to this.","What is improving children's access to books and literacy?","How can a personal experience become a shared organizational mission?"],["Dolly's ability to mobilize people and organizations toward sustained results demonstrates this beyond celebrity.","What is leadership through influence toward shared goals?","Which documented action offers the strongest evidence that Parton was a leader?"]]},{"category":"Behavior Analysis","clues":[["Communicating a compelling shared vision is this component of transformational leadership.","What is inspirational motivation?","Which of the four transformational leadership dimensions has the strongest supporting evidence?"],["The My People Fund's assistance to wildfire-affected families illustrates an approach consistent with this philosophy.","What is servant leadership?","How does serving beneficiaries differ from servant leadership toward employees?"],["Consistency among publicly stated values, personal history, and long-term actions can be examined through this theory.","What is authentic leadership?","What distinguishes demonstrated authenticity from effective personal branding?"],["Coordinating publishers, funders, local affiliates, and specialists resembles this team-based approach.","What is shared or distributed leadership?","Where does Parton's personal influence end and her partners' leadership begin?"],["This behavioral model evaluates concern for people and concern for production.","What is the Managerial Grid?","Why can't we determine Parton's exact grid position from public philanthropic achievements?"]]},{"category":"Contextual Analysis","clues":[["This East Tennessee county was Parton's home and the original location of her book-gifting program.","What is Sevier County?","How did her upbringing and local economic conditions shape her priorities?"],["Her celebrity status, financial capacity, and professional relationships provided these advantages.","What are reputational, financial, and social resources?","Could a lesser-known leader build a comparable organization using different resources?"],["These disasters in 2016 prompted the creation of the My People Fund.","What were the Great Smoky Mountains wildfires?","How does crisis leadership differ from building a long-term organization?"],["The number of books distributed measures this type of organizational result, rather than proving later reading proficiency.","What is an organizational output?","What evidence would demonstrate long-term educational outcomes?"],["Parton's death in August 2026 made this organizational challenge especially important.","What is succession planning and organizational continuity?","What would show that her organizations can sustain their missions without her?"]]},{"category":"Takeaway Points","clues":[["Turning a literacy vision into a recurring book-delivery program demonstrates the importance of doing this.","What is translating a vision into an actionable system?","Why isn't an inspiring vision enough to create lasting impact?"],["Dollywood and the Imagination Library demonstrate the importance of these relationships between people with different strengths.","What are strategic partnerships and complementary capabilities?","When should a leader rely on expertise that they don't personally possess?"],["A mission that unites funders, volunteers, employees, and communities illustrates the value of this.","What is a shared purpose?","Must everyone share the same personal motivation to work toward a common goal?"],["Excessive admiration for a founder could discourage disagreement and create this team decision-making problem.","What is groupthink?","How could Parton's organizations encourage constructive dissent? This is a potential risk, not an established claim."],["An organization's ability to continue its mission after its founder's departure demonstrates this leadership principle.","What is sustainable organizational leadership?","Was Dolly's greater achievement her personal influence or the organizations she helped create?"]]}];
+
+(function(){
+"use strict";
+const root=document.getElementById("board");
+const progress=document.getElementById("progress");
+const panel=document.getElementById("panel");
+const label=document.getElementById("label");
+const clue=document.getElementById("clue");
+const answer=document.getElementById("answer");
+const discussion=document.getElementById("discussion");
+const solution=document.getElementById("solution");
+const reveal=document.getElementById("reveal");
+const covered=new Set();
+const values=[100,200,300,400,500];
+let current=null;
+function render(){
+  root.replaceChildren();
+  DATA.forEach(function(cat){
+    const heading=document.createElement("div");
+    heading.className="heading";
+    heading.textContent=cat.category;
+    root.appendChild(heading);
+  });
+  values.forEach(function(value,row){
+    DATA.forEach(function(cat,col){
+      const key=col+":"+row;
+      const tile=document.createElement("button");
+      tile.type="button";
+      tile.className="tile"+(covered.has(key)?" done":"");
+      tile.textContent=covered.has(key)?"✓":"$"+value;
+      tile.setAttribute("aria-label",cat.category+" for $"+value);
+      tile.addEventListener("click",function(){openClue(col,row)});
+      root.appendChild(tile);
+    });
+  });
+  progress.textContent=covered.size+" of 20 clues covered";
+}
+function openClue(col,row){
+  current=col+":"+row;
+  const item=DATA[col].clues[row];
+  label.textContent=DATA[col].category+" · $"+values[row];
+  clue.textContent=item[0];
+  answer.textContent=item[1];
+  discussion.textContent=item[2];
+  solution.hidden=true;
+  reveal.hidden=false;
+  panel.hidden=false;
+  panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+reveal.addEventListener("click",function(){
+  solution.hidden=false;
+  reveal.hidden=true;
+});
+document.getElementById("covered").addEventListener("click",function(){
+  if(current!==null)covered.add(current);
+  panel.hidden=true;
+  render();
+});
+document.getElementById("back").addEventListener("click",function(){
+  panel.hidden=true;
+});
+document.getElementById("reset").addEventListener("click",function(){
+  covered.clear();
+  current=null;
+  panel.hidden=true;
+  render();
+});
+document.getElementById("fullscreen").addEventListener("click",function(){
+  if(document.fullscreenElement){
+    if(document.exitFullscreen)document.exitFullscreen();
+  }else if(document.documentElement.requestFullscreen){
+    document.documentElement.requestFullscreen();
+  }
+});
+document.addEventListener("keydown",function(event){
+  if(event.key==="Escape"&&!document.fullscreenElement)panel.hidden=true;
+});
+render();
+})();
+
+</script>
+</body>
+</html>
